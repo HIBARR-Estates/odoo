@@ -1,0 +1,15 @@
+[options]
+db_host = localhost
+db_port = 5432
+db_user = 
+db_password = 
+default_productivity_apps = True
+xmlrpc_interface = 127.0.0.1
+proxy_mode = True
+admin_passwd =
+gevent_port = 8072
+workers = 4
+max_cron_threads = 1
+longpolling_port = False
+
+
