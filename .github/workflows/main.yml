@@ -1,0 +1,46 @@
+name: Auto Deploy on Branch Push
+
+on:
+  push:
+    branches:
+      - main        # Trigger on pushes to the main branch (prod)
+      - staging     # Trigger on pushes to the staging branch (staging)
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+
+    - name: SSH into server and pull latest code
+      run: |
+        if [ "${{ github.ref }}" == "refs/heads/main" ]; then
+          echo "Deploying to production"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /opt/odoo/hibarr-crm/odoo-production/  # production folder path
+            git pull origin main
+            # Restart the Odoo service for production
+            sudo systemctl restart odoo-prod.service
+            # Restart NGINX using init.d
+            sudo /etc/init.d/nginx restart
+          EOF
+        elif [ "${{ github.ref }}" == "refs/heads/staging" ]; then
+          echo "Deploying to staging"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
+            cd /opt/odoo/hibarr-crm/odoo-staging/  #staging folder path
+            git pull origin staging
+            # Restart the Odoo service for staging
+            sudo systemctl restart odoo-staging.service
+            # Restart NGINX using init.d
+            sudo /etc/init.d/nginx restart
+          EOF
+        fi
