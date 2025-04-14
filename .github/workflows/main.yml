@@ -3,8 +3,8 @@ name: Auto Deploy on Branch Push
 on:
   push:
     branches:
-      - main         # Trigger on pushes to the main branch (prod)
-      - staging      # Trigger on pushes to the staging branch (staging)
+      - main
+      - staging
 
 jobs:
   deploy:
@@ -18,24 +18,23 @@ jobs:
         run: |
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
           echo "Current branch is $BRANCH"
+          
           if [ "$BRANCH" = "main" ]; then
             echo "🚀 Deploying to production..."
-            ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
+            ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-production/
-              # Use the full path to git command and ensure SSH agent is used
-              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git fetch origin
-              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git reset --hard origin/main
+              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git fetch origin
+              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git reset --hard origin/main
               sudo systemctl restart odoo-production.service
-            EOF
+            "
           elif [ "$BRANCH" = "staging" ]; then
             echo "🚀 Deploying to staging..."
-            ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
+            ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-staging/
-              # Use the full path to git command and ensure SSH agent is used
-              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git fetch origin
-              GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git reset --hard origin/staging
+              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git fetch origin
+              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git reset --hard origin/staging
               sudo systemctl restart odoo-staging.service
-            EOF
+            "
           else
             echo "⚠️ No deployment configured for branch: $BRANCH"
           fi
