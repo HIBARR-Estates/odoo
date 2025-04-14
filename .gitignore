@@ -10,6 +10,8 @@
 *.swn
 *.pid
 *.DS_Store
+debian/odoo.conf
+odoo.conf
 
 # Database dumps
 *.dump
