@@ -1,1 +1,51 @@
-debian/odoo.conf
+# Odoo specific ignores
+*.py[co]
+*.egg-info
+*.pot
+*.mo
+*.log
+*.tmp
+*.swp
+*.swo
+*.swn
+*.pid
+*.DS_Store
+
+# Database dumps
+*.dump
+*.backup
+
+# Session data
+.sessions/
+
+# Cache directories
+.cache/
+__pycache__/
+
+# Odoo filestore
+/filestore/
+
+# IDE specific files
+.idea/
+.vscode/
+*.iml
+
+# Environment files
+.env
+.envrc
+
+# Local development files
+local_*
+/local_addons/
+
+# Deployment artifacts
+.ropeproject
+.coverage
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
