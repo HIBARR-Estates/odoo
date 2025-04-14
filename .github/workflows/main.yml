@@ -3,18 +3,29 @@ name: Auto Deploy on Branch Push
 on:
   push:
     branches:
-      - main
-      - staging
+      - main         # Trigger on pushes to the main branch (prod)
+      - staging      # Trigger on pushes to the staging branch (staging)
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
+    - name: Checkout Code
+      uses: actions/checkout@v4
 
-      - name: Deploy via SSH
+    - name: Set up SSH
+      run: |
+        mkdir -p ~/.ssh
+        printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+
+        HOST=${{ secrets.SERVER_HOST }}
+        PORT=${{ secrets.SERVER_PORT }}
+        ssh-keyscan -p "$PORT" -H "$HOST" >> ~/.ssh/known_hosts
+        echo "SSH key and known_hosts set up."
+
+- name: Deploy via SSH
         run: |
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
           echo "Current branch is $BRANCH"
