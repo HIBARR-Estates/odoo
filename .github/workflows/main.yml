@@ -36,6 +36,7 @@ jobs:
               cd /opt/odoo/hibarr-crm/odoo-production/
               git fetch origin
               git reset --hard origin/main
+              git pull
               sudo systemctl restart odoo-production.service
             "
           elif [ "$BRANCH" = "staging" ]; then
@@ -44,6 +45,7 @@ jobs:
               cd /opt/odoo/hibarr-crm/odoo-staging/
               git fetch origin
               git reset --hard origin/staging
+              git pull
               sudo systemctl restart odoo-staging.service
             "
           else
