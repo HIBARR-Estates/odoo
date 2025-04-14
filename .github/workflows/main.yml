@@ -14,27 +14,6 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Set up SSH
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -p ${{ secrets.SERVER_PORT }} -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
-          echo "SSH key and known_hosts set up."
-
-      - name: Set up SSH Agent and Test Git Connection
-        run: |
-          # Start SSH agent
-          eval $(ssh-agent -s)
-          
-          # Add SSH key to the agent
-          ssh-add ~/.ssh/id_rsa
-          
-          # Test SSH connection (optional)
-          ssh -T ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
-            echo "SSH connection successful"
-          EOF
-
       - name: Deploy via SSH
         run: |
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
