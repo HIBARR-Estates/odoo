@@ -3,12 +3,19 @@ from odoo import models, fields
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    # Address fields to be added before tabs
-    street = fields.Char(string='Street')
-    street2 = fields.Char(string='Street2')
-    zip = fields.Char(string='Zip')
-    city = fields.Char(string='City')
-    country_id = fields.Many2one('res.country', string='Country')
+    # # Address fields to be added before tabs
+    # street = fields.Char(string='Street')
+    # street2 = fields.Char(string='Street2')
+    # zip = fields.Char(string='Zip')
+    # city = fields.Char(string='City')
+    # country_id = fields.Many2one('res.country', string='Country')
+   
+       # Use standard address fields from base module
+    street = fields.Char(related='partner_id.street', readonly=False)
+    street2 = fields.Char(related='partner_id.street2', readonly=False)
+    zip = fields.Char(related='partner_id.zip', readonly=False)
+    city = fields.Char(related='partner_id.city', readonly=False)
+    country_id = fields.Many2one(related='partner_id.country_id', readonly=False)
     nationality = fields.Many2one('res.country', string='Nationality')
 
     # Personal Information Tab
