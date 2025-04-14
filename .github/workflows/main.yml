@@ -17,9 +17,7 @@ jobs:
       - name: Deploy via SSH
         run: |
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
-          
           echo "Current branch is $BRANCH"
-
           if [ "$BRANCH" = "main" ]; then
             echo "🚀 Deploying to production..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
@@ -29,7 +27,6 @@ jobs:
               GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git reset --hard origin/main
               sudo systemctl restart odoo-production.service
             EOF
-
           elif [ "$BRANCH" = "staging" ]; then
             echo "🚀 Deploying to staging..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
@@ -39,7 +36,6 @@ jobs:
               GIT_SSH_COMMAND="ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}" git reset --hard origin/staging
               sudo systemctl restart odoo-staging.service
             EOF
-
           else
             echo "⚠️ No deployment configured for branch: $BRANCH"
           fi
