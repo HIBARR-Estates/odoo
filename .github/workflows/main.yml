@@ -3,8 +3,8 @@ name: Auto Deploy on Branch Push
 on:
   push:
     branches:
-      - main      # Deploy production
-      - staging   # Deploy staging
+      - main
+      - staging
 
 jobs:
   deploy:
@@ -29,7 +29,7 @@ jobs:
         BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
         
         echo "Current branch is $BRANCH"
-    
+
         if [ "$BRANCH" = "main" ]; then
           echo "🚀 Deploying to production..."
           ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
@@ -38,7 +38,7 @@ jobs:
             git reset --hard origin/main
             sudo systemctl restart odoo-production.service
           EOF
-    
+
         elif [ "$BRANCH" = "staging" ]; then
           echo "🚀 Deploying to staging..."
           ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
@@ -47,7 +47,7 @@ jobs:
             git reset --hard origin/staging
             sudo systemctl restart odoo-staging.service
           EOF
-    
+
         else
           echo "⚠️ No deployment configured for branch: $BRANCH"
         fi
