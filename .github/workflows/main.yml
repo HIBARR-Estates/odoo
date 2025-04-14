@@ -14,6 +14,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
+
       - name: Deploy via SSH
         run: |
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
@@ -23,16 +29,16 @@ jobs:
             echo "🚀 Deploying to production..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-production/
-              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git fetch origin
-              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git reset --hard origin/main
+              git fetch origin
+              git reset --hard origin/main
               sudo systemctl restart odoo-production.service
             "
           elif [ "$BRANCH" = "staging" ]; then
             echo "🚀 Deploying to staging..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-staging/
-              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git fetch origin
-              GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa -p ${{ secrets.SERVER_PORT }}' git reset --hard origin/staging
+              git fetch origin
+              git reset --hard origin/staging
               sudo systemctl restart odoo-staging.service
             "
           else
