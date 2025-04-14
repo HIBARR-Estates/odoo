@@ -3,8 +3,8 @@ name: Auto Deploy on Branch Push
 on:
   push:
     branches:
-      - main
-      - staging
+      - main         # Trigger on pushes to the main branch (prod)
+      - staging      # Trigger on pushes to the staging branch (staging)
 
 jobs:
   deploy:
@@ -32,21 +32,21 @@ jobs:
 
         if [ "$BRANCH" = "main" ]; then
           echo "🚀 Deploying to production..."
-          ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+          ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
             cd /opt/odoo/hibarr-crm/odoo-production/
             git fetch origin
             git reset --hard origin/main
             sudo systemctl restart odoo-production.service
-          EOF
+EOF
 
         elif [ "$BRANCH" = "staging" ]; then
           echo "🚀 Deploying to staging..."
-          ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << EOF
+          ssh -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} <<EOF
             cd /opt/odoo/hibarr-crm/odoo-staging/
             git fetch origin
             git reset --hard origin/staging
             sudo systemctl restart odoo-staging.service
-          EOF
+EOF
 
         else
           echo "⚠️ No deployment configured for branch: $BRANCH"
