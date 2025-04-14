@@ -34,10 +34,17 @@ jobs:
             echo "🚀 Deploying to production..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-production/
-              git fetch origin
-              git reset --hard origin/main
-              git pull
+              # 1. Clean up any Python cache files
+              sudo -u odoo find . -name '*.pyc' -delete
+              
+              # 2. Reset to latest GitHub version
+              sudo -u odoo git fetch origin
+              sudo -u odoo git reset --hard origin/main
+              
+              # 3. Only then restart the service
               sudo systemctl restart odoo-production.service
+              
+              echo '✅ Deployment complete!'
             "
           elif [ "$BRANCH" = "staging" ]; then
             echo "🚀 Deploying to staging..."
