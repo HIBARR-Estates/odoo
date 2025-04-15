@@ -14,6 +14,7 @@
         'crm',
     ],
     'data': [
+        'data/language_data.xml',
         'views/analysis_views.xml',
     ],
     'installable': True,
