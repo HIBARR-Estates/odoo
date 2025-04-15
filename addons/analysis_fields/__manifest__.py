@@ -15,7 +15,6 @@
         'contacts',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/analysis_views.xml',
     ],
     'assets': {
