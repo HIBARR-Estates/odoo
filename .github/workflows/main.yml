@@ -37,7 +37,7 @@ jobs:
 
                             
               # 1. Clean up any Python cache files
-              sudo -u odoo find . -name '*.pyc' -delete
+              sudo -u deploy find . -name '*.pyc' -delete
               # 2. Mark the directory as safe
               sudo -u deploy git config --global --add safe.directory /opt/odoo/hibarr-crm/odoo-production
               # 3. Reset to latest GitHub version
@@ -55,7 +55,7 @@ jobs:
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
               cd /opt/odoo/hibarr-crm/odoo-production/
               # 1. Clean up any Python cache files
-              sudo -u odoo find . -name '*.pyc' -delete
+              sudo -u deploy find . -name '*.pyc' -delete
               
               # 2. Reset to latest GitHub version
               sudo -u deploy git fetch origin
