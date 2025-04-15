@@ -19,13 +19,4 @@ class CustomLanguage(models.Model):
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
     
-    # Use standard address fields from base module
-    street = fields.Char(related='partner_id.street', readonly=False)
-    street2 = fields.Char(related='partner_id.street2', readonly=False)
-    zip = fields.Char(related='partner_id.zip', readonly=False)
-    city = fields.Char(related='partner_id.city', readonly=False)
-    country_id = fields.Many2one(related='partner_id.country_id', readonly=False)
-
-    child1_age = fields.Integer(string='Child 1 Age')
-    child2_age = fields.Integer(string='Child 2 Age')
-    # ... etc
+ 
