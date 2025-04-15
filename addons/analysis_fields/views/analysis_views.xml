@@ -2,7 +2,7 @@
 <odoo>
     <!-- Analysis Tag Views -->
     <record id="view_analysis_tag_tree" model="ir.ui.view">
-        <field name="name">analysis.tag.tree</field>
+        <field name="name">analysis.tag.list</field>
         <field name="model">analysis.tag</field>
         <field name="arch" type="xml">
             <list string="Analysis Tags">

@@ -13,7 +13,7 @@ class ResPartner(models.Model):
 
     partner_analysis_notes = fields.Text(string='Analysis Notes')
     partner_analysis_date = fields.Date(string='Analysis Date')
-    partner_analysis_score = fields.Float(string='Analysis Score', digits=(3, 2))
+    partner_analysis_score = fields.Float(string='Analysis Score', digits=(5, 2))
     
     # Analysis Tags
     partner_analysis_tags = fields.Many2many(

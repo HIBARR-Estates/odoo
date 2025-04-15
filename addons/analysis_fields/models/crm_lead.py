@@ -21,8 +21,8 @@ class CrmLead(models.Model):
     ], string='Analysis Priority', default='medium')
 
     # Analysis Metrics
-    analysis_score = fields.Float(string='Analysis Score', digits=(3, 2))
-    analysis_completion = fields.Float(string='Analysis Completion %', digits=(3, 2))
+    analysis_score = fields.Float(string='Analysis Score', digits=(5, 2))
+    analysis_completion = fields.Float(string='Analysis Completion %', digits=(5, 2))
     analysis_risk_level = fields.Selection([
         ('low', 'Low Risk'),
         ('medium', 'Medium Risk'),

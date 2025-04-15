@@ -12,16 +12,10 @@
     'depends': [
         'base',
         'crm',
-        'contacts',
     ],
     'data': [
         'views/analysis_views.xml',
     ],
-    'assets': {
-        'web.assets_backend': [
-            'analysis_fields/static/src/**/*',
-        ],
-    },
     'installable': True,
     'application': False,
     'auto_install': False,
