@@ -1,7 +1,7 @@
 <!-- <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
-        <!-- Common Languages -->
+       
         <record id="lang_english" model="analysis.language">
             <field name="name">English</field>
             <field name="code">en</field>
