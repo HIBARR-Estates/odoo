@@ -16,10 +16,10 @@ class ResPartner(models.Model):
     partner_analysis_score = fields.Float(string='Analysis Score', digits=(5, 2))
     
     # Analysis Tags
-    partner_analysis_tags = fields.Many2many(
-        'analysis.tag',
-        'partner_analysis_tag_rel',
-        'partner_id',
-        'tag_id',
-        string='Analysis Tags'
-    ) 
+    # partner_analysis_tags = fields.Many2many(
+    #     'analysis.tag',
+    #     'partner_analysis_tag_rel',
+    #     'partner_id',
+    #     'tag_id',
+    #     string='Analysis Tags'
+    # ) 
