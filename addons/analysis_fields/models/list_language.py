@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 
 class Language(models.Model):
-    _name = 'analysis.language'
+    _name = 'customer.language'
     _description = 'Language'
     _order = 'name'
 
