@@ -3,8 +3,7 @@ name: Auto Deploy on Branch Push
 on:
   push:
     branches:
-      - main         # Trigger on pushes to the main branch (prod)
-      - staging      # Trigger on pushes to the staging branch (staging)
+      - staging      # Trigger on pushes to the staging branch
 
 jobs:
   deploy:
@@ -30,41 +29,24 @@ jobs:
           BRANCH=$(echo "${{ github.ref }}" | sed 's|refs/heads/||')
           echo "Current branch is $BRANCH"
           
-          if [ "$BRANCH" = "main" ]; then
-            echo "🚀 Deploying to production..."
+          if [ "$BRANCH" = "staging" ]; then
+            echo "🚀 Deploying to staging..."
             ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-              cd /opt/odoo/hibarr-crm/odoo-production/
+              cd /opt/odoo/hibarr-crm/odoo-staging/
 
-                            
               # 1. Clean up any Python cache files
               sudo -u deploy find . -name '*.pyc' -delete
               # 2. Mark the directory as safe
-              sudo -u deploy git config --global --add safe.directory /opt/odoo/hibarr-crm/odoo-production
+              sudo -u deploy git config --global --add safe.directory /opt/odoo/hibarr-crm/odoo-staging
               # 3. Reset to latest GitHub version
-              sudo -u deploy git fetch origin
-              sudo -u deploy git reset --hard origin/main
-              
-              # 4. Restart the service
-              sudo systemctl restart odoo-production.service
-              
-              echo '✅ Deployment complete!'
-
-            "
-          elif [ "$BRANCH" = "staging" ]; then
-            echo "🚀 Deploying to staging..."
-            ssh -v -p ${{ secrets.SERVER_PORT }} ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} "
-              cd /opt/odoo/hibarr-crm/odoo-production/
-              # 1. Clean up any Python cache files
-              sudo -u deploy find . -name '*.pyc' -delete
-              
-              # 2. Reset to latest GitHub version
               sudo -u deploy git fetch origin
               sudo -u deploy git reset --hard origin/staging
               
-              # 3. Only then restart the service
+              # 4. Restart the service
               sudo systemctl restart odoo-staging.service
               
-              echo '✅ Deployment complete!'
+              echo '✅ Staging deployment complete!'
+
             "
           else
             echo "⚠️ No deployment configured for branch: $BRANCH"
