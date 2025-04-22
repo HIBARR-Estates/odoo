@@ -1,0 +1,4 @@
+access_custom_language_user,custom.language.user,custom.language,base.group_user,1,0,0,0
+access_custom_language_admin,custom.language.admin,custom.language,base.group_system,1,1,1,1
+access_property_feature_user,property.feature.user,property.feature,base.group_user,1,0,0,0
+access_property_feature_admin,property.feature.admin,property.feature,base.group_system,1,1,1,1
