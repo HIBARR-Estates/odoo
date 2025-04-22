@@ -13,7 +13,7 @@
         'views/crm_lead_custom_view.xml',
         'data/custom_language_data.xml',
         'data/property_features_data.xml',
-        
+
     ],
     'assets': {
         'web.assets_backend': [
