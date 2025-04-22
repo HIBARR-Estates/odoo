@@ -20,5 +20,6 @@ class PropertyFeature(models.Model):
         ('banking_needs', 'Banking Needs'),
         ('cooperation', 'Cooperation')
     ], string='Feature Type', required=True)
+    _ondelete_methods = ['cascade']
     active = fields.Boolean(default=True)
     description = fields.Text(string='Description') 

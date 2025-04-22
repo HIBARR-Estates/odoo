@@ -9,7 +9,7 @@
     'author': 'HIBARR Estates',
     'depends': ['crm'],
     'data': [
-        'security/ir.model.access.csv',
+        
         'views/crm_lead_custom_view.xml',
         'data/custom_language_data.xml',
         'data/property_features_data.xml',
@@ -22,6 +22,6 @@
     },
     'installable': True,
     'application': False,
-    'auto_install': False,
+    'auto_install': True,
     'license': 'LGPL-3',
 }

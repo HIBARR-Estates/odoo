@@ -8,17 +8,17 @@ class AgentCommissionLine(models.Model):
     agent_id = fields.Many2one('res.users', string='Agent', required=True)
     commission = fields.Float(string='Commission', digits=(5, 2))
 
-# class CrmLeadChild(models.Model):
-#     _name = 'crm.lead.child'
-#     _description = 'CRM Lead Child Information'
+class CrmLeadChild(models.Model):
+    _name = 'crm.lead.child'
+    _description = 'CRM Lead Child Information'
 
-#     lead_id = fields.Many2one('crm.lead', string='Lead', required=True, ondelete='cascade')
-#     age = fields.Integer(string='Age', required=True)
-#     gender = fields.Selection([
-#         ('male', 'Male'),
-#         ('female', 'Female'),
-#         ('other', 'Other')
-#     ], string='Gender', required=True)
+    lead_id = fields.Many2one('crm.lead', string='Lead', required=True, ondelete='cascade')
+    age = fields.Integer(string='Age', required=True)
+    gender = fields.Selection([
+        ('male', 'Male'),
+        ('female', 'Female'),
+        ('other', 'Other')
+    ], string='Gender', required=True)
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
