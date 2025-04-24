@@ -21,7 +21,7 @@
                         <field name="hr_comment"/>
                     </group>
                     <field name="submitted_at" readonly="1"/>
-                    <field name="is_late" readonly="1"/>
+                    <field name="is_late" readonly="1" />
                 </sheet>
             </form>
         </field>
@@ -33,11 +33,11 @@
         <field name="type">list</field>
         <field name="arch" type="xml">
             <list string="Daily Reports">
-                <field name="employee_id"/>
-                <field name="report_date"/>
-                <field name="hr_rating"/>
-                <field name="supervisor_rating"/>
-                <field name="is_late"/>
+                <field name="employee_id" width="30%" />
+                <field name="supervisor_rating" width="25%" widget="priority"/>
+                <field name="hr_rating" width="25%" widget="priority"/>
+                <field name="is_late" width="10%" widget="boolean"/>
+                <field name="report_date" width="10%" />
             </list>
         </field>
     </record>
