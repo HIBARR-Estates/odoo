@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_daily_employee_report_user,daily.employee.report user,model_daily_employee_report,base.group_user,1,1,1,0
+access_daily_employee_report_manager,daily.employee.report manager,model_daily_employee_report,hr.group_hr_manager,1,1,1,1
+access_daily_employee_report_admin,daily.employee.report admin,model_daily_employee_report,base.group_system,1,1,1,1
+access_daily_employee_report_mgr,daily.employee.report mgr,model_daily_employee_report,daily_report_full_admin.group_daily_report_manager,1,1,1,1

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="daily_report_full_admin.group_daily_report_manager" model="res.groups">
+            <field name="name">Daily Report Manager</field>
+        </record>
+
+        <record id="daily_report_full_admin.group_daily_report_admin" model="res.groups">
+            <field name="name">Daily Report Admin</field>
+        </record>
+
+    </data>
+</odoo>
