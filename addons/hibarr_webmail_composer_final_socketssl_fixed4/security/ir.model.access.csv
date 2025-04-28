@@ -1,0 +1,2 @@
+access_mail_account,access_mail_account,model_mail_account,base.group_user,1,1,1,1
+access_mail_send_wizard,access_mail_send_wizard,model_mail_send_wizard,base.group_user,1,1,1,1
