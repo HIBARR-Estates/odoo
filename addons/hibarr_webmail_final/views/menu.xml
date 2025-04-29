@@ -1,0 +1,4 @@
+<odoo>
+    <menuitem id="menu_webmail_root" name="Webmail"/>
+    <menuitem id="menu_webmail_accounts" name="Mail Accounts" parent="menu_webmail_root" action="action_mail_account"/>
+</odoo>

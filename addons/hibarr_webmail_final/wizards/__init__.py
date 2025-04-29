@@ -1,1 +1,1 @@
-# Wizards init
+from . import mail_send_wizard

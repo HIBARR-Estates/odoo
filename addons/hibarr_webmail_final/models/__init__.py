@@ -1,1 +1,1 @@
-# Models init
+from . import mail_account
