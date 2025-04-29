@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Amenities -->
+        <record id="feature_communal_pool" model="property.feature">
+            <field name="name">Communal Pool</field>
+            <field name="feature_type">amenity</field>
+        </record>
+        <record id="feature_gym" model="property.feature">
+            <field name="name">Gym/Fitness</field>
+            <field name="feature_type">amenity</field>
+        </record>
+        
+        <!-- Interior Features -->
+        <record id="feature_private_pool" model="property.feature">
+            <field name="name">Private Pool</field>
+            <field name="feature_type">interior</field>
+        </record>
+        <record id="feature_smart_home" model="property.feature">
+            <field name="name">Smart Home</field>
+            <field name="feature_type">interior</field>
+        </record>
+
+        <!-- Infrastructure -->
+        <record id="feature_university" model="property.feature">
+            <field name="name">University/School</field>
+            <field name="feature_type">infrastructure</field>
+        </record>
+        <record id="feature_hospital" model="property.feature">
+            <field name="name">Hospital/Clinic</field>
+            <field name="feature_type">infrastructure</field>
+        </record>
+
+        <!-- Assets -->
+        <record id="feature_car" model="property.feature">
+            <field name="name">Car</field>
+            <field name="feature_type">assets</field>
+        </record>
+        <record id="feature_house" model="property.feature">
+            <field name="name">House</field>
+            <field name="feature_type">assets</field>
+        </record>
+
+        <!-- Permit Needs -->
+        <record id="feature_residence" model="property.feature">
+            <field name="name">Residence Permit</field>
+            <field name="feature_type">permit_needs</field>
+        </record>
+        <record id="feature_work" model="property.feature">
+            <field name="name">Work Permit</field>
+            <field name="feature_type">permit_needs</field>
+        </record>
+
+        <!-- Education Needs -->
+        <record id="feature_school" model="property.feature">
+            <field name="name">School Registration</field>
+            <field name="feature_type">education_needs</field>
+        </record>
+        <record id="feature_language" model="property.feature">
+            <field name="name">Language Course</field>
+            <field name="feature_type">education_needs</field>
+        </record>
+
+        <!-- Insurance Needs -->
+        <record id="feature_health" model="property.feature">
+            <field name="name">Health Insurance</field>
+            <field name="feature_type">insurance_needs</field>
+        </record>
+        <record id="feature_property" model="property.feature">
+            <field name="name">Property Insurance</field>
+            <field name="feature_type">insurance_needs</field>
+        </record>
+
+        <!-- Legal Needs -->
+        <record id="feature_company" model="property.feature">
+            <field name="name">Company Formation</field>
+            <field name="feature_type">legal_needs</field>
+        </record>
+        <record id="feature_tax" model="property.feature">
+            <field name="name">Tax Registration</field>
+            <field name="feature_type">legal_needs</field>
+        </record>
+
+        <!-- Car Needs -->
+        <record id="feature_new_car" model="property.feature">
+            <field name="name">New Car</field>
+            <field name="feature_type">car_needs</field>
+        </record>
+        <record id="feature_rental" model="property.feature">
+            <field name="name">Car Rental</field>
+            <field name="feature_type">car_needs</field>
+        </record>
+
+        <!-- Investment Needs -->
+        <record id="feature_stocks" model="property.feature">
+            <field name="name">Stocks/Bonds</field>
+            <field name="feature_type">investment_needs</field>
+        </record>
+        <record id="feature_crypto" model="property.feature">
+            <field name="name">Cryptocurrency</field>
+            <field name="feature_type">investment_needs</field>
+        </record>
+
+        <!-- Banking Needs -->
+        <record id="feature_account" model="property.feature">
+            <field name="name">Bank Account</field>
+            <field name="feature_type">banking_needs</field>
+        </record>
+        <record id="feature_credit" model="property.feature">
+            <field name="name">Credit Card</field>
+            <field name="feature_type">banking_needs</field>
+        </record>
+
+        <!-- Cooperation -->
+        <record id="feature_agent" model="property.feature">
+            <field name="name">Agent</field>
+            <field name="feature_type">cooperation</field>
+        </record>
+        <record id="feature_investor" model="property.feature">
+            <field name="name">Investor</field>
+            <field name="feature_type">cooperation</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,42 @@
+<odoo>
+    <!-- Define the Groups -->
+    <record id="crm_lead_acl_agent" model="res.groups">
+        <field name="name">Agent</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <record id="crm_lead_acl_viewer" model="res.groups">
+        <field name="name">Viewer</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <record id="crm_lead_acl_closer" model="res.groups">
+        <field name="name">Closer</field>
+        <field name="category_id" ref="base.module_category_sales"/>
+    </record>
+
+    <!-- Then, create the Access Control List (ACLs) using the groups defined -->
+    <record id="crm_lead_rule_agent" model="ir.rule">
+        <field name="name">CRM Lead: Agent Access</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="groups" eval="[(4, ref('hibarr_analysis_fields.crm_lead_acl_agent'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+    </record>
+
+    <record id="crm_lead_rule_viewer" model="ir.rule">
+        <field name="name">CRM Lead: Viewer Access</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="groups" eval="[(4, ref('hibarr_analysis_fields.crm_lead_acl_viewer'))]"/>
+        <field name="domain_force">[('user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
+    <!-- You can add more rules like the ones above for other groups -->
+</odoo>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Amenities -->
+    <record id="feature_communal_pool" model="property.feature">
+        <field name="name">Communal Pool</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_gym" model="property.feature">
+        <field name="name">Gym/Fitness</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_spa" model="property.feature">
+        <field name="name">SPA/Wellness</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_sports" model="property.feature">
+        <field name="name">Outdoor Sports</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_restaurant" model="property.feature">
+        <field name="name">Restaurant</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_cinema" model="property.feature">
+        <field name="name">Cinema</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_beauty_salon" model="property.feature">
+        <field name="name">Hair &amp; Beauty Salon</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_cctv" model="property.feature">
+        <field name="name">24/7 CCTV</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_playground" model="property.feature">
+        <field name="name">Kids Playground</field>
+        <field name="addon_type">amenity</field>
+    </record>
+    <record id="feature_carpark" model="property.feature">
+        <field name="name">Car Park</field>
+        <field name="addon_type">amenity</field>
+    </record>
+
+    <!-- Interior Features -->
+    <record id="feature_private_pool" model="property.feature">
+        <field name="name">Private Pool</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_private_garden" model="property.feature">
+        <field name="name">Private Garden</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_heated_pool" model="property.feature">
+        <field name="name">Heated Pool</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_smart_home" model="property.feature">
+        <field name="name">Smart Home</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_basement" model="property.feature">
+        <field name="name">Basement</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_balcony" model="property.feature">
+        <field name="name">Balcony/Terrace</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_outdoor_kitchen" model="property.feature">
+        <field name="name">Outdoor Kitchen</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_storage" model="property.feature">
+        <field name="name">Storage</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_jacuzzi" model="property.feature">
+        <field name="name">Jacuzzi</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_roof_terrace" model="property.feature">
+        <field name="name">Roof Terrace</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_elevator" model="property.feature">
+        <field name="name">Elevator</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_bbq" model="property.feature">
+        <field name="name">BBQ Area</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_barrier_free" model="property.feature">
+        <field name="name">Barrier-free</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_hvac" model="property.feature">
+        <field name="name">Central Heating and Cooling</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_solar" model="property.feature">
+        <field name="name">Solar Panel</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_pet_friendly" model="property.feature">
+        <field name="name">Pet-Friendly</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_water_filter" model="property.feature">
+        <field name="name">Water Filter</field>
+        <field name="addon_type">interior</field>
+    </record>
+    <record id="feature_instant_hot_water" model="property.feature">
+        <field name="name">Instant Hot Water</field>
+        <field name="addon_type">interior</field>
+    </record>
+
+    <!-- Infrastructure Features -->
+    <record id="feature_university" model="property.feature">
+        <field name="name">University/School</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_kindergarten" model="property.feature">
+        <field name="name">Kindergarten/Nursery</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_hotel_casino" model="property.feature">
+        <field name="name">Hotel/Casino</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_hospital" model="property.feature">
+        <field name="name">Hospital/Clinic</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_pharmacy" model="property.feature">
+        <field name="name">Pharmacy</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_supermarket" model="property.feature">
+        <field name="name">Supermarket</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_restaurants_bars" model="property.feature">
+        <field name="name">Restaurants/Bars</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_shopping_mall" model="property.feature">
+        <field name="name">Shopping Center/Mall</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_banks" model="property.feature">
+        <field name="name">Banks/ATM</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_nightlife" model="property.feature">
+        <field name="name">Clubs/Night-life</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_worship" model="property.feature">
+        <field name="name">Mosque/Church</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_marina" model="property.feature">
+        <field name="name">Marina</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_crypto_exchange" model="property.feature">
+        <field name="name">Fiat &amp; Crypto Exchange</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_beauty_salon_infra" model="property.feature">
+        <field name="name">Hair &amp; Beauty Salon</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <record id="feature_airport" model="property.feature">
+        <field name="name">Airport</field>
+        <field name="addon_type">infrastructure</field>
+    </record>
+    <!-- Assets for Sale -->
+    <record id="feature_car" model="property.feature">
+        <field name="name">Car</field>
+        <field name="addon_type">assets</field>
+    </record>
+    <record id="feature_house" model="property.feature">
+        <field name="name">House</field>
+        <field name="addon_type">assets</field>
+    </record>
+    
+    <record id="feature_other_asset" model="property.feature">
+        <field name="name">Other Asset</field>
+        <field name="addon_type">assets</field>
+    </record>
+    <!-- Necessities & After Sales Services -->
+    <record id="feature_visa_needs" model="property.feature">
+        <field name="name">Visa Needs</field>
+        <field name="addon_type">permit_needs</field>
+    </record>
+    <record id="feature_residence_permit" model="property.feature">
+        <field name="name">Residence Permit</field>
+        <field name="addon_type">permit_needs</field>
+    </record>
+    <record id="feature_working_permit" model="property.feature">
+        <field name="name">Working Permit</field>
+        <field name="addon_type">permit_needs</field>
+    </record>
+    <record id="feature_study_permit" model="property.feature">
+        <field name="name">Study Permit/Student ID</field>
+        <field name="addon_type">permit_needs</field>
+    </record>
+    <record id="feature_drivers_license" model="property.feature">
+        <field name="name">Driver's License</field>
+        <field name="addon_type">permit_needs</field>
+    </record>
+    <!-- Education Needs -->
+    <record id="feature_nursery" model="property.feature">
+        <field name="name">Nursery/Kindergarten</field>
+        <field name="addon_type">education_needs</field>
+    </record>
+    <record id="feature_school" model="property.feature">
+        <field name="name">School Education</field>
+        <field name="addon_type">education_needs</field>
+    </record>
+    <record id="feature_university" model="property.feature">
+        <field name="name">University</field>
+        <field name="addon_type">education_needs</field>
+    </record>
+    <record id="feature_advanced_training" model="property.feature">
+        <field name="name">Advanced Training Courses</field>
+        <field name="addon_type">education_needs</field>
+    </record>
+    <!-- Insurance Needs -->
+    <record id="feature_health_insurance" model="property.feature">
+        <field name="name">Health Insurance</field>
+        <field name="addon_type">insurance_needs</field>
+    </record>
+    <record id="feature_household_insurance" model="property.feature">
+        <field name="name">Household Insurance</field>
+        <field name="addon_type">insurance_needs</field>
+    </record>
+    <record id="feature_liability_insurance" model="property.feature">
+        <field name="name">Liability Insurance</field>
+        <field name="addon_type">insurance_needs</field>
+    </record>
+    <record id="feature_general_insurance" model="property.feature">
+        <field name="name">General Insurance</field>
+        <field name="addon_type">insurance_needs</field>
+    </record>
+    <!-- Legal Needs -->
+    <record id="feature_lawyer_notary" model="property.feature">
+        <field name="name">Lawyer/Notary</field>
+        <field name="addon_type">legal_needs</field>
+    </record>
+    <record id="feature_accountant" model="property.feature">
+        <field name="name">Accountant</field>
+        <field name="addon_type">legal_needs</field>
+    </record>
+    <record id="feature_company_constructs" model="property.feature">
+        <field name="name">Company Constructs</field>
+        <field name="addon_type">legal_needs</field>
+    </record>
+    <!-- Car Services -->
+    <record id="feature_transfer_service" model="property.feature">
+        <field name="name">Transfer Service</field>
+        <field name="addon_type">car_needs</field>
+    </record>
+    <record id="feature_car_rental" model="property.feature">
+        <field name="name">Renting a Car</field>
+        <field name="addon_type">car_needs</field>
+    </record>
+    <record id="feature_car_purchase" model="property.feature">
+        <field name="name">Buying a Car</field>
+        <field name="addon_type">car_needs</field>
+    </record>
+    <!-- Investment Consultation -->
+    <record id="feature_bank_investment" model="property.feature">
+        <field name="name">Bank Investment Consultation</field>
+        <field name="addon_type">investment_needs</field>
+    </record>
+    <record id="feature_crypto_investment" model="property.feature">
+        <field name="name">Crypto Investment Consultation</field>
+        <field name="addon_type">investment_needs</field>
+    </record>
+    <record id="feature_insurance_investment" model="property.feature">
+        <field name="name">Insurance Investment Consultation</field>
+        <field name="addon_type">investment_needs</field>
+    </record>
+    <!-- Banking Needs -->
+    <record id="feature_bank_account" model="property.feature">
+        <field name="name">Bank Account</field>
+        <field name="addon_type">banking_needs</field>
+    </record>
+    <record id="feature_debit_credit_card" model="property.feature">
+        <field name="name">Debit &amp; Credit Card</field>
+        <field name="addon_type">banking_needs</field>
+    </record>
+    <!-- Cooperation -->
+    <record id="feature_agent" model="property.feature">
+        <field name="name">Agent</field>
+        <field name="addon_type">cooperation</field>
+    </record>
+    <record id="feature_training" model="property.feature">
+        <field name="name">Training Program</field>
+        <field name="addon_type">cooperation</field>
+    </record>
+    <record id="feature_internship" model="property.feature">
+        <field name="name">Internship</field>
+        <field name="addon_type">cooperation</field>
+    </record>
+    <record id="feature_tipster" model="property.feature">
+        <field name="name">Tipster</field>
+        <field name="addon_type">cooperation</field>
+    </record>
+</odoo> 
