@@ -12,7 +12,6 @@
     'data': [
         'views/analysis_view.xml',
         'views/lead_participant_views.xml',
-        'data/checkboxes_data.xml',
         'data/property_feature_data.xml',
         'security/lead_salesperson_rule.xml',
     ],

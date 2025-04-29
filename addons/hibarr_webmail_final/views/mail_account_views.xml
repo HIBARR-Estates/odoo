@@ -21,17 +21,18 @@
         <field name="name">mail.account.tree</field>
         <field name="model">mail.account</field>
         <field name="arch" type="xml">
-            <tree string="Mail Accounts">
+            <list string="Mail Accounts">
                 <field name="name"/>
                 <field name="smtp_server"/>
                 <field name="smtp_port"/>
-            </tree>
+            </list>
         </field>
     </record>
 
     <record id="action_mail_account" model="ir.actions.act_window">
         <field name="name">Mail Accounts</field>
         <field name="res_model">mail.account</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_mail_account_tree"/>
     </record>
 </odoo>

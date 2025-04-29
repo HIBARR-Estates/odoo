@@ -9,6 +9,11 @@ class MultipleSalesperson(models.Model):
     lead_id = fields.Many2one('crm.lead', string='Lead')
     user_id = fields.Many2one('res.users', string='Salesperson')
     commission = fields.Float(string='Commission', default=0.0)
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+
+    commission = fields.Float(string='Commission', default=0.0, help='Commission percentage for the user.', digits=(5, 2))
     
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
@@ -16,28 +21,45 @@ class CrmLead(models.Model):
     partner_id = fields.Many2one('res.partner', string='Partner')  
     user_ids = fields.Many2many(
         'res.users',
-        string='Salespersons',
+        string='Additional Salespersons',
         relation='crm_lead_user_rel',  
         column1='lead_id',
         column2='user_id',
         tracking=True
     )
-    # Add One2many field for multiple.salesperson records
-    # user_ids = fields.One2many(
-    #     'multiple.salesperson', 'lead_id', string='Salespersons',
-    #     tracking=True
-    # )
 
-    commission = fields.Float(
-        string='Commission',
-        default=0.0,
-        help='Commission percentage for the user on this lead.'
+    customer_email = fields.Char(
+        string="Email",
+        related='partner_id.email',
+        store=True,
+        help="Customer email address",
+        readonly=False
     )
-
-    assigned_to_current_user = fields.Boolean(
-        string="Assigned to Current User",
-        compute="_compute_assigned_to_current_user",
-        store=False
+    phone = fields.Char(
+        string="Phone",
+        related='partner_id.phone',
+        store=True,
+    )
+    street = fields.Char(
+        string="Street",
+        related='partner_id.street',
+        store=True,
+    )
+    city = fields.Char(
+        string="City",
+        related='partner_id.city',
+        store=True,
+    )
+    zip = fields.Char(
+        string="ZIP",
+        related='partner_id.zip',
+        store=True,
+    )
+    country_id = fields.Many2one(
+        'res.country',
+        string="Country",
+        related='partner_id.country_id',
+        store=True,
     )
 
     
@@ -783,7 +805,20 @@ class CrmLead(models.Model):
         lead = super().create(vals)
         if vals.get('user_ids'):
             lead._assign_salespersons(vals.get('user_ids'))
+
         return lead
+
+    def write(self, vals):
+        for record in self:
+            # Check if the user_ids are being modified
+            if 'user_ids' in vals:
+                # If user_ids are being changed, ensure the user is either an admin
+                # or the owner of the lead (the user who created it)
+                if not self.env.user.has_group('base.group_system') and record.create_uid != self.env.user:
+                    raise UserError("You can only change the salespersons if you are the owner of the lead.")
+
+        # Call the super method to apply the write action after the checks
+        return super(CrmLead, self).write(vals)
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
@@ -805,18 +840,4 @@ class CrmLead(models.Model):
         return res
 
 
-
-    @api.depends('user_ids.commission')
-    def _compute_commission(self):
-        for record in self:
-            # Sum the commission field from the related multiple.salesperson records
-            record.commission = sum(record.user_ids.mapped('commission'))
-
-    @api.depends('user_ids')
-    def _compute_assigned_to_current_user(self):
-        current_user_id = self.env.user.id
-        for record in self:
-            record.assigned_to_current_user = any(
-                salesperson.user_id.id == current_user_id for salesperson in record.user_ids
-            )
 

@@ -21,7 +21,7 @@
                                 </div>
                             <div style="flex: 0 0 36%;" class="d-flex align-items-baseline">
                                 <label for="sales_commission_percent" class="oe_inline">Commission:</label>
-                                <field name="sales_commission_percent" widget="float" nolabel="1"/>
+                                <field name="sales_commission_percent" widget="float" nolabel="1" options="{'max': 15}"/>
                                 <span class="oe_grey p-2">%</span>
                             </div>
                             </div>
@@ -33,6 +33,10 @@
             <group>
                 <!-- Left: Address -->
                     <group class="custom-address-group">
+
+                    
+                    <field name='phone' placeholder="Phone" widget='phone' class="o_address_phone"/>
+                    <field name="customer_email" widget="email" context="{'gravatar_image': True}" required="user_ids"/>
                     <label for="street" string="Address"/>
                     <div class="o_address_format">
                         <field name="street" placeholder="Street..." class="o_address_street"/>
@@ -54,10 +58,11 @@
                 <group string="Additional Agents">
                     <field name="user_ids" widget="Many2many_list" options="{'no_create': True}" nolabel="1">
                         <list editable="bottom">
-                            <field name="user_id"/>
-                            <field name="commission"/>
+                            <field name="user_id" />
+                            <field name='commission' widget="float" nolabel="1" options="{'max': 15}"/>
                         </list>
                     </field>
+                    <!-- <field name='user_ids' widget='many2many_tags' options="{'no_create': True}" context="{'default_sales_team_id': team_id}"/> -->
                 </group>
                 <group name="referal" string="Referral Information">
                     
@@ -398,16 +403,16 @@
                         <field name="legal_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
                     </group>
                     <group string="Car Needs">
-                        <field name="car_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
+                        <field name="car_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': true}"/>
                     </group>
                     <group string="Investment Needs">
-                        <field name="investment_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
+                        <field name="investment_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': true}"/>
                     </group>
                     <group string="Banking Needs">
-                        <field name="banking_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
+                        <field name="banking_needs" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': true}"/>
                     </group>
                     <group string="Cooperation Possibilities">
-                        <field name="cooperation_type" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
+                        <field name="cooperation_type" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': true}"/>
                     </group>
                 </group>
             </page>
