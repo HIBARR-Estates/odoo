@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="webmail_toolbar_template" name="Webmail Toolbar">
+        <div class="o_webmail_toolbar">
+            <input type="text" placeholder="Search by email or subject" class="o_input"/>
+            <input type="date" class="o_date_filter"/>
+            <select class="o_sort_selector">
+                <option value="date">Sort by Date</option>
+                <option value="size">Sort by Size</option>
+            </select>
+        </div>
+    </template>
+</odoo>
