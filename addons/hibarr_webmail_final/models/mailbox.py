@@ -20,11 +20,13 @@ class Mailbox(models.Model):
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, context=context) as server:
                 server.login(self.smtp_user, self.smtp_password)
-                message = f"Subject: {subject}\n\n{body}"
+                message = f"From: {self.smtp_user}\nTo: {to_address}\nSubject: {subject}\n\n{body}"
                 server.sendmail(self.smtp_user, to_address, message)
             return True
+        except smtplib.SMTPException as e:
+            return f"SMTP error occurred: {str(e)}"
         except Exception as e:
-            return str(e)
+            return f"An error occurred: {str(e)}"
 
     def fetch_emails(self):
         try:
