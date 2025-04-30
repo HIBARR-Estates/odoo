@@ -79,6 +79,11 @@ class CrmLead(models.Model):
         ('no', 'No')
     ], string="Bank Services Required", default='no')
 
+    is_bank_services_readonly = fields.Boolean(
+        string="Is Bank Services Readonly",
+        compute="_compute_is_bank_services_readonly",
+        store=False
+    )
     
     lead_quality = fields.Selection(
         selection=[
@@ -135,14 +140,16 @@ class CrmLead(models.Model):
     languages = fields.Many2many(
         comodel_name='custom.language',
         relation='crm_lead_custom_language_rel',
-        column1='lead_id',           # name of FK pointing to crm.lead
-        column2='language_id',       # name of FK pointing to custom.language
+        column1='lead_id',           
+        column2='language_id',       
         related='partner_id.languages',
         string="Languages",
         store=True,
         readonly=False,
         help="Languages spoken by the partner."
     )
+
+
 
 
     marital_status = fields.Selection(
@@ -614,43 +621,16 @@ class CrmLead(models.Model):
     ], string="Payment Type")
     payment_type_other = fields.Char(string="Other Payment Type", help="Please specify if 'Other' is selected")
 
-    # Multiple Currency and Amount fields
-    currency_id = fields.Selection([
-        ('EUR', 'Euro (€)'),
-        ('GBP', 'British Pound (£)'),
-        ('USD', 'US Dollar ($)')
-    ], string='Default Currency', default='EUR')
-    
-    # Initial Payment
-    initial_payment_currency = fields.Selection([
-        ('EUR', 'Euro (€)'),
-        ('GBP', 'British Pound (£)'),
-        ('USD', 'US Dollar ($)')
-    ], string='Initial Payment Currency', default='EUR')
+
     initial_payment_amount = fields.Float(string='Initial Payment Amount', digits=(16, 2))
 
-    # Monthly Installment
-    monthly_currency = fields.Selection([
-        ('EUR', 'Euro (€)'),
-        ('GBP', 'British Pound (£)'),
-        ('USD', 'US Dollar ($)')
-    ], string='Monthly Installment Currency', default='EUR')
+
     monthly_amount = fields.Float(string='Monthly Installment Amount', digits=(16, 2))
 
-    # Total Budget
-    budget_currency = fields.Selection([
-        ('EUR', 'Euro (€)'),
-        ('GBP', 'British Pound (£)'),
-        ('USD', 'US Dollar ($)')
-    ], string='Budget Currency', default='EUR')
+ 
     budget_amount = fields.Float(string='Total Budget Amount', digits=(16, 2))
 
-    # Reservation Deposit
-    deposit_currency = fields.Selection([
-        ('EUR', 'Euro (€)'),
-        ('GBP', 'British Pound (£)'),
-        ('USD', 'US Dollar ($)')
-    ], string='Deposit Currency', default='EUR')
+
     deposit_amount = fields.Float(string='Reservation Deposit Amount', digits=(16, 2))
 
     payment_plan_years = fields.Selection([
@@ -684,8 +664,22 @@ class CrmLead(models.Model):
      domain="[('feature_type', '=', 'assets')]",
      help="Select the assets for sale you are looking for"
    )
-    
-
+    car_assets_visible = fields.Boolean(
+        string="Assets Visible", 
+        compute="_compute_assets_for_sale", 
+        store=True)
+    house_assets_visible = fields.Boolean(
+        string="Assets Visible", 
+        compute="_compute_assets_for_sale", 
+        store=True)
+    office_assets_visible = fields.Boolean(
+        string="Assets Visible",
+        compute="_compute_assets_for_sale",
+        store=True)
+    other_assets_visible = fields.Boolean(
+        string="Assets Visible",
+        compute="_compute_assets_for_sale",
+        store=True)
     # Financial Details
     savings = fields.Float(string="Savings", digits=(16,2))
     crypto_savings = fields.Float(string="Crypto Savings", digits=(16,2))
@@ -839,5 +833,30 @@ class CrmLead(models.Model):
 
         return res
 
+    @api.depends('vip_status')
+    def _compute_is_bank_services_readonly(self):
+        for record in self:
+            record.is_bank_services_readonly = record.vip_status == 'vip'
+    @api.depends('car_for_sale', 'house_for_sale', 'office_for_sale', 'other_assets_for_sale')
+    def _compute_assets_for_sale(self):
+        for record in self:
+            record.assets_for_sale = any([
+                record.car_for_sale,
+                record.house_for_sale,
+                record.office_for_sale,
+                record.other_assets_for_sale
+            ])
 
+    @api.onchange('assets_for_sale')
+    def _onchange_assets_for_sale(self):
+        if self.assets_for_sale:
+            self.car_assets_visible = any(lang.name == 'Car' for lang in self.assets_for_sale)
+            self.house_assets_visible = any(lang.name == 'House' for lang in self.assets_for_sale)
+            self.office_assets_visible = any(lang.name == 'Office' for lang in self.assets_for_sale)
+            self.other_assets_visible = any(lang.name == 'Other' for lang in self.assets_for_sale)
+        else:
+            self.car_assets_visible = False
+            self.house_assets_visible = False
+            self.office_assets_visible = False
+            self.other_assets_visible = False
 

@@ -1,0 +1,47 @@
+<odoo>
+    <record id="view_mailbox_form" model="ir.ui.view">
+        <field name="name">webmail.mailbox.form</field>
+        <field name="model">webmail.mailbox</field>
+        <field name="arch" type="xml">
+            <form string="Mailbox">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="smtp_server"/>
+                        <field name="smtp_port"/>
+                        <field name="smtp_user"/>
+                        <field name="smtp_password" password="True"/>
+                        <field name="imap_server"/>
+                        <field name="imap_port"/>
+                    </group>
+                    <footer>
+                        <button name="send_email" type="object" string="Send Test Email" class="btn-primary"/>
+                        <button name="fetch_emails" type="object" string="Fetch Emails" class="btn-secondary"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mailbox_tree" model="ir.ui.view">
+        <field name="name">webmail.mailbox.tree</field>
+        <field name="model">webmail.mailbox</field>
+        <field name="arch" type="xml">
+            <tree string="Mailboxes">
+                <field name="name"/>
+                <field name="smtp_server"/>
+                <field name="imap_server"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mailbox" model="ir.actions.act_window">
+        <field name="name">Mailboxes</field>
+        <field name="res_model">webmail.mailbox</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_mailbox_tree"/>
+    </record>
+
+    <menuitem id="menu_webmail_root" name="Webmail" sequence="10"/>
+    <menuitem id="menu_webmail_mailbox" name="Mailboxes" parent="menu_webmail_root" action="action_mailbox" sequence="20"/>
+</odoo>

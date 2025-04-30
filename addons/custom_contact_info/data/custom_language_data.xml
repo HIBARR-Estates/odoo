@@ -21,5 +21,9 @@
             <field name="name">Russian</field>
             <field name="code">RU</field>
         </record>
+        <record id="clang_other" model="custom.language">
+            <field name="name">Other</field>
+            <field name="code">OT</field>
+        </record>
     </data>
 </odoo>

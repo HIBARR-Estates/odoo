@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
@@ -24,6 +24,7 @@ class ResPartner(models.Model):
         help="Select the languages you speak",
         tracking=True
     )
+    other_languages = fields.Char(string="Other Languages", tracking=True)
     marital_status = fields.Selection([
         ('single', 'Single'),
         ('married', 'Married'),
@@ -58,6 +59,8 @@ class ResPartner(models.Model):
         help="Select the languages your partner speaks",
         tracking=True
     )
+    partner_other_languages = fields.Char(string="Partner's Other Languages", tracking=True)
+    partner_language_other_visible = fields.Boolean(string="Is Partner Other Language Visible", compute="_onchange_partner_languages", store=True)
     # children information
     children_group = fields.Selection([
         ('yes', 'Yes'),
@@ -77,7 +80,20 @@ class ResPartner(models.Model):
         ('yes', 'Yes'),
         ('no', 'No')
     ], string="Are you currently living with your children?", tracking=True)
-
+    language_other_visible = fields.Boolean(string="Is Other Language Visible", compute="_onchange_languages", store=True)
     def update_contact_info(self, value):
         for rec in self:
             rec.contact_info = value
+    @api.onchange('languages')
+    def _onchange_languages(self):
+        if self.languages and any(lang.name == 'Other' for lang in self.languages):
+            self.language_other_visible = True
+        else:
+            self.language_other_visible = False
+
+    @api.onchange('partner_languages')
+    def _onchange_partner_languages(self):
+        if self.partner_languages and any(lang.name == 'Other' for lang in self.partner_languages):
+            self.partner_language_other_visible = True
+        else:
+            self.partner_language_other_visible = False

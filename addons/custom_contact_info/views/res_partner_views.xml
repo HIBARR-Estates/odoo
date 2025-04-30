@@ -29,6 +29,9 @@
                                     <label for="languages" string="Languages" class="oe_inline"/>
                                     <field name="languages" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
                                 </div>
+                              
+                                    <field name="other_languages" placeholder="Specify Other Language" invisible="not language_other_visible"/>
+                                
                                 <field name="children_group" widget="radio" options="{'horizontal': true}"/>
                             </group>
                             <group>
@@ -101,6 +104,7 @@
                                 <label for="partner_languages" string="Languages" class="oe_inline"/>
                                 <field name="partner_languages" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
                             </div>
+                            <field name="partner_other_languages" placeholder="Specify Other Language" invisible="not partner_language_other_visible"/>
                         </group>
                         <group>
                             <field name="partner_last_name" placeholder="Partner's Last Name"/>

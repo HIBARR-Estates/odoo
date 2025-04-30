@@ -6,12 +6,16 @@
             <form string="Mail Account">
                 <sheet>
                     <group>
+
                         <field name="name"/>
                         <field name="smtp_server"/>
                         <field name="smtp_port"/>
                         <field name="smtp_user"/>
                         <field name="smtp_password"/>
+                        <button name="action_test_smtp" type="object" string="Test SMTP" class="btn-primary"/>
+
                     </group>
+                  
                 </sheet>
             </form>
         </field>
@@ -21,6 +25,7 @@
         <field name="name">mail.account.tree</field>
         <field name="model">mail.account</field>
         <field name="arch" type="xml">
+        
             <list string="Mail Accounts">
                 <field name="name"/>
                 <field name="smtp_server"/>

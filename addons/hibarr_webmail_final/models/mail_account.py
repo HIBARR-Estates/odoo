@@ -11,10 +11,39 @@ class MailAccount(models.Model):
     smtp_user = fields.Char(required=True)
     smtp_password = fields.Char(required=True)
 
-    def send_mail(self, to_address, subject, body_html):
+    def test_smtp_connection(self):
         for account in self:
-            message = f"""From: {account.smtp_user}\r\nTo: {to_address}\r\nSubject: {subject}\r\nContent-Type: text/html; charset=utf-8\r\n\r\n{body_html}"""
-            context = ssl.create_default_context()
-            with smtplib.SMTP_SSL(account.smtp_server, account.smtp_port, context=context) as server:
-                server.login(account.smtp_user, account.smtp_password)
-                server.sendmail(account.smtp_user, to_address, message.encode('utf-8'))
+            try:
+                context = ssl.create_default_context()
+                with smtplib.SMTP_SSL(account.smtp_server, account.smtp_port, context=context) as server:
+                    server.login(account.smtp_user, account.smtp_password)
+                return True
+            except Exception as e:
+
+                return str(e)
+
+    def action_test_smtp(self):
+        self.ensure_one()
+        result = self.test_smtp_connection()
+        if result is True:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': 'SMTP Test Successful',
+                    'message': 'The SMTP connection was successful.',
+                    'type': 'success',
+                    'sticky': False,
+                },
+            }
+        else:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'title': 'SMTP Test Failed',
+                    'message': f'Error: {result}',
+                    'type': 'danger',
+                    'sticky': True,
+                },
+            }

@@ -14,6 +14,7 @@
         'views/lead_participant_views.xml',
         'data/property_feature_data.xml',
         'security/lead_salesperson_rule.xml',
+        'security/ir.model.access.csv',
     ],
     'assets': {
         'web.assets_backend': [

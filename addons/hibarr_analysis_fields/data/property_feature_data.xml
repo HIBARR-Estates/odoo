@@ -40,7 +40,14 @@
             <field name="name">House</field>
             <field name="feature_type">assets</field>
         </record>
-
+        <record id="feature_apartment" model="property.feature">
+            <field name="name">Office</field>
+            <field name="feature_type">assets</field>
+        </record>
+        <record id="feature_other" model="property.feature">
+            <field name="name">Other</field>
+            <field name="feature_type">assets</field>
+        </record>
         <!-- Permit Needs -->
         <record id="feature_residence" model="property.feature">
             <field name="name">Residence Permit</field>

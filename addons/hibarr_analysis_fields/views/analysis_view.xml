@@ -49,7 +49,7 @@
                         <field name="customer_nationality" placeholder="Customer Nationality" class="o_address_country"
                                    options="{'no_open': True, 'no_create': True}"/>
                     <field name="vip_status" placeholder="Select a package"/>
-                    <field name="bank_services" widget="radio" options="{'horizontal': true}"/>
+                    <field name="bank_services" widget="radio" options="{'horizontal': true}" readonly="is_bank_services_readonly"/>
                 </group>
                 
                 
@@ -110,6 +110,7 @@
                                     <label for="languages" string="Languages" class="oe_inline"/>
                                     <field name="languages" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
                                 </div>
+                               
                                 <field name="children_group" widget="radio" options="{'horizontal': true}"/>
                             </group>
                             <group>
@@ -366,10 +367,10 @@
                         </group>
                         <group string="Assets for Sale">
                             <field name="assets_for_sale" widget="many2many_checkboxes" options="{'horizontal': true, 'no_open': True, 'no_create': True}"/>
-                            <field name="car_for_sale" string="Car for Sale" invisible="not ('feature_car' in assets_for_sale)"/>
-                            <field name="house_for_sale" string="House for Sale" invisible="not ('feature_house' in assets_for_sale)"/>
-                            <field name="office_for_sale" string="Office for Sale" invisible="not ('feature_office' in assets_for_sale)"/>
-                            <field name="other_assets_for_sale" string="Other Assets for Sale" invisible="not ('feature_other_asset' in assets_for_sale)"/>
+                            <field name="car_for_sale" string="Car for Sale" invisible="not car_assets_visible"/>
+                            <field name="house_for_sale" string="House for Sale" invisible="not house_assets_visible"/>
+                            <field name="office_for_sale" string="Office for Sale" invisible="not office_assets_visible"/>
+                            <field name="other_assets_for_sale" string="Other Assets for Sale" invisible="not other_assets_visible"/>
                         </group>
                         <group string="Financial Details">
                             <field name="savings" widget="monetary" string="Savings" options="{'currency_field': 'company_currency'}"/>
