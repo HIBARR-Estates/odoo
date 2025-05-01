@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_mail_message_tree" model="ir.ui.view">
+        <field name="name">mail.message.tree</field>
+        <field name="model">mail.message</field>
+        <field name="arch" type="xml">
+            <list string="Mails">
+                <field name="subject"/>
+                <field name="email_from"/>
+                <field name="date"/>
+            </list>
+        </field>
+    </record>
+</odoo>
