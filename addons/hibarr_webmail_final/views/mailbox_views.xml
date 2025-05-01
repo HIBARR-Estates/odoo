@@ -13,6 +13,9 @@
                         <field name="smtp_password" password="True"/>
                         <field name="imap_server"/>
                         <field name="imap_port"/>
+                        <field name="recipient_partner_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('email','!=',False)]"/>
+                        <field name="subject"/>
+                        <field name="body"/>
                     </group>
                     <footer>
                         <button name="send_email" type="object" string="Send Test Email" class="btn-primary"/>
@@ -27,11 +30,11 @@
         <field name="name">webmail.mailbox.tree</field>
         <field name="model">webmail.mailbox</field>
         <field name="arch" type="xml">
-            <tree string="Mailboxes">
+            <list string="Mailboxes">
                 <field name="name"/>
                 <field name="smtp_server"/>
                 <field name="imap_server"/>
-            </tree>
+            </list>
         </field>
     </record>
 

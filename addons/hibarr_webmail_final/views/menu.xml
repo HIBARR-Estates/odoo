@@ -1,14 +1,5 @@
 <odoo>
     <menuitem id="menu_webmail_root" name="Webmail"/>
     <menuitem id="menu_webmail_accounts" name="Mail Accounts" parent="menu_webmail_root" action="action_mail_account"/>
-    
-    <menuitem id="menu_webmail" name="Webmail" parent="menu_webmail_root" sequence="10" />
-    <menuitem id="menu_webmail_send_email" name="Send Email" parent="menu_webmail" action="action_webmail_send_email" sequence="10" />
-
-<record id="action_webmail_send_email" model="ir.actions.act_window">
-    <field name="name">Send Email</field>
-    <field name="res_model">webmail.mailbox</field>
-    <field name="view_mode">form</field>
-    <field name="target">new</field>
-</record>
+    <menuitem id="menu_webmail_compose" name="Compose Mail" parent="menu_webmail_root" action="action_compose_mail"/>
 </odoo>

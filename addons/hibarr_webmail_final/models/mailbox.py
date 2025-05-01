@@ -14,14 +14,23 @@ class Mailbox(models.Model):
     smtp_password = fields.Char(string='SMTP Password', required=True)
     imap_server = fields.Char(string='IMAP Server', required=True)
     imap_port = fields.Integer(string='IMAP Port', required=True, default=993)
+    recipient_partner_ids = fields.Many2many('res.partner', string='Recipients')
+    subject = fields.Char(string='Subject')
+    body = fields.Text(string='Body')
 
-    def send_email(self, to_address, subject, body):
+    def send_email(self):
+        self.ensure_one()
+        to_addresses = [p.email for p in self.recipient_partner_ids if p.email]
+        subject = self.subject
+        body = self.body
+        if not to_addresses:
+            return 'No recipient emails found.'
         try:
             context = ssl.create_default_context()
             with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, context=context) as server:
                 server.login(self.smtp_user, self.smtp_password)
-                message = f"From: {self.smtp_user}\nTo: {to_address}\nSubject: {subject}\n\n{body}"
-                server.sendmail(self.smtp_user, to_address, message)
+                message = f"From: {self.smtp_user}\nTo: {', '.join(to_addresses)}\nSubject: {subject}\n\n{body}"
+                server.sendmail(self.smtp_user, to_addresses, message)
             return True
         except smtplib.SMTPException as e:
             return f"SMTP error occurred: {str(e)}"
