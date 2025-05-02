@@ -22,6 +22,7 @@ class Mailbox(models.Model):
     inbox_email_ids = fields.One2many('webmail.email', 'mailbox_id', string='Inbox Emails', domain="[('folder','=','INBOX')]")
     sent_email_ids = fields.One2many('webmail.email', 'mailbox_id', string='Sent Emails', domain="[('folder','=','Sent')]")
     draft_email_ids = fields.One2many('webmail.email', 'mailbox_id', string='Draft Emails', domain="[('folder','=','Drafts')]")
+    user_id = fields.Many2one('res.users', string='Owner', required=True, default=lambda self: self.env.user)
 
     def fetch_emails(self):
         try:
