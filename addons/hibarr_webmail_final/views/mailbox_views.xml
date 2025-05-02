@@ -4,6 +4,11 @@
         <field name="model">webmail.mailbox</field>
         <field name="arch" type="xml">
             <form string="Mailbox">
+                <header>
+                    <button name="test_connection" string="Test Connection" type="object" class="btn-primary"/>
+                    <button name="fetch_recent_emails" string="Fetch Recent Emails" type="object" class="btn-primary"/>
+                    <button name="fetch_all_emails" string="Fetch All Emails" type="object" class="btn-primary"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
@@ -13,27 +18,63 @@
                         <field name="smtp_password" password="True"/>
                         <field name="imap_server"/>
                         <field name="imap_port"/>
-                        <field name="recipient_partner_ids" widget="many2many_tags" options="{'no_create': True}" domain="[('email','!=',False)]"/>
-                        <field name="subject"/>
-                        <field name="body"/>
+                        <field name="last_ssl_refresh" readonly="1"/>
                     </group>
-                    <footer>
-                        <button name="send_email" type="object" string="Send Test Email" class="btn-primary"/>
-                        <button name="fetch_emails" type="object" string="Fetch Emails" class="btn-secondary"/>
-                    </footer>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_mailbox_tree" model="ir.ui.view">
-        <field name="name">webmail.mailbox.tree</field>
+    <record id="view_mailbox_list" model="ir.ui.view">
+        <field name="name">webmail.mailbox.list</field>
         <field name="model">webmail.mailbox</field>
         <field name="arch" type="xml">
             <list string="Mailboxes">
                 <field name="name"/>
-                <field name="smtp_server"/>
+                <field name="smtp_user"/>
                 <field name="imap_server"/>
+                <field name="last_ssl_refresh"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_webmail_email_form" model="ir.ui.view">
+        <field name="name">webmail.email.form</field>
+        <field name="model">webmail.email</field>
+        <field name="arch" type="xml">
+            <form string="Email">
+                <header>
+                    <button name="mark_as_read" string="Mark as Read" type="object" hide="is_read"/>
+                    <button name="mark_as_unread" string="Mark as Unread" type="object" show="is_read"/>
+                    <button name="action_delete" string="Delete" type="object" class="btn-danger"/>
+                    <button name="reply" string="Reply" type="object" class="btn-primary"/>
+                    <button name="forward" string="Forward" type="object" class="btn-secondary"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="subject" readonly="1"/>
+                        <field name="sender" readonly="1"/>
+                        <field name="date" readonly="1"/>
+                        <field name="folder" readonly="1"/>
+                        <field name="is_read" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="body" widget="html" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_webmail_email_list" model="ir.ui.view">
+        <field name="name">webmail.email.list</field>
+        <field name="model">webmail.email</field>
+        <field name="arch" type="xml">
+            <list string="Emails">
+                <field name="subject"/>
+                <field name="sender"/>
+                <field name="date"/>
+                <field name="is_read"/>
             </list>
         </field>
     </record>
@@ -41,10 +82,19 @@
     <record id="action_mailbox" model="ir.actions.act_window">
         <field name="name">Mailboxes</field>
         <field name="res_model">webmail.mailbox</field>
-        <field name="view_mode">tree,form</field>
-        <field name="view_id" ref="view_mailbox_tree"/>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_mailbox_list"/>
+    </record>
+
+    <record id="action_mailbox_inbox" model="ir.actions.act_window">
+        <field name="name">Inbox</field>
+        <field name="res_model">webmail.email</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_webmail_email_list"/>
+        <field name="target">current</field>
     </record>
 
     <menuitem id="menu_webmail_root" name="Webmail" sequence="10"/>
     <menuitem id="menu_webmail_mailbox" name="Mailboxes" parent="menu_webmail_root" action="action_mailbox" sequence="20"/>
+    <menuitem id="menu_webmail_inbox" name="Inbox" parent="menu_webmail_root" sequence="30" action="action_mailbox_inbox"/>
 </odoo>

@@ -1,6 +1,7 @@
 from odoo import models, fields, api
 import smtplib, ssl
 import imaplib
+from email.mime.text import MIMEText
 
 class SendMail(models.Model):
     _name = 'send.mail'
@@ -22,11 +23,15 @@ class SendMail(models.Model):
         return f'<br><br>{signature}' if signature else ''
 
     @api.model
-    def create(self, vals):
-        if not vals.get('body'):
-            signature = self.env.user.signature or ''
-            vals['body'] = f'<br><br>{signature}' if signature else ''
-        return super().create(vals)
+    def create(self, vals_list):
+        # Support both single and batch create
+        if isinstance(vals_list, dict):
+            vals_list = [vals_list]
+        for vals in vals_list:
+            if not vals.get('body'):
+                signature = self.env.user.signature or ''
+                vals['body'] = f'<br><br>{signature}' if signature else ''
+        return super().create(vals_list)
 
     def action_save_draft(self):
         self.ensure_one()
@@ -44,10 +49,22 @@ class SendMail(models.Model):
     def action_cancel(self):
         self.ensure_one()
         self.state = 'cancelled'
-        return {'type': 'ir.actions.act_window_close'}
+        res = {'type': 'ir.actions.act_window_close'}
+        self.unlink()  # Delete the record after cancelling
+        return res
 
     def action_send_mail(self):
         self.ensure_one()
+        if not self.mail_account_id or self.mail_account_id.user_id != self.env.user:
+            return {
+                'type': 'ir.actions.client',
+                'tag': 'display_notification',
+                'params': {
+                    'message': 'You are not allowed to use this mail account.',
+                    'type': 'danger',
+                    'sticky': True,
+                }
+            }
         if not self.mail_account_id:
             return {
                 'type': 'ir.actions.client',
@@ -65,18 +82,15 @@ class SendMail(models.Model):
                 server.login(account.smtp_user, account.smtp_password)
                 sender = f"{account.name} <{account.smtp_user}>" if account.name else account.smtp_user
                 to_addresses = [email.strip() for email in self.recipient_email.split(',') if email.strip()]
-                message = f"From: {sender}\nTo: {', '.join(to_addresses)}\nSubject: {self.subject}\n\n{self.body}"
-                server.sendmail(account.smtp_user, to_addresses, message)
+                msg = MIMEText(self.body, "html")
+                msg["From"] = sender
+                msg["To"] = ", ".join(to_addresses)
+                msg["Subject"] = self.subject
+                server.sendmail(account.smtp_user, to_addresses, msg.as_string())
             self.state = 'sent'
-            return {
-                'type': 'ir.actions.client',
-                'tag': 'display_notification',
-                'params': {
-                    'message': 'Email sent successfully',
-                    'type': 'success',
-                    'sticky': False,
-                }
-            }
+            res = {'type': 'ir.actions.act_window_close'}
+            self.unlink()  # Delete the record after sending
+            return res
         except Exception as e:
             return {
                 'type': 'ir.actions.client',

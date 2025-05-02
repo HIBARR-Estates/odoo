@@ -10,6 +10,7 @@ class MailAccount(models.Model):
     smtp_port = fields.Integer(required=True, default=465)
     smtp_user = fields.Char(required=True)
     smtp_password = fields.Char(required=True)
+    user_id = fields.Many2one('res.users', string='User', default=lambda self: self.env.user, required=True)
 
     def test_smtp_connection(self):
         for account in self:

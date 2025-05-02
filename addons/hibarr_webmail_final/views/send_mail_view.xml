@@ -7,10 +7,10 @@
             <form string="Send Mail" create="false" edit="false">               
                 <sheet>
                     <group>
-                        <field name="mail_account_id"/>
+                        <field name="mail_account_id" domain="[('user_id', '=', uid)]"/>
                         <field name="recipient_email"/>
                         <field name="subject"/>
-                        <field name="body" widget="html" options="{'height': 300}"/>
+                        <field name="body" widget="html" options="{'height': 400, 'styleWithSpan': true}" class="o_summernote_custom"/>
                     </group>
                 </sheet>
             <footer>
