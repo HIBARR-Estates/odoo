@@ -328,6 +328,7 @@ class CrmLead(models.Model):
         ('yes', 'Yes'),
         ('no', 'No')
     ], string="Do you have any investment experience?")
+    investment_country = fields.Many2one('res.country', string="Investment Country", help="Select the country where you have investment experience")
     investment_purpose = fields.Selection([
         ('profit', 'Profit'),
         ('tax', 'Tax'),
@@ -362,11 +363,25 @@ class CrmLead(models.Model):
         ('buy_sell', 'Buy & Sell'),
         ('long_term', 'Long-term Investment'),
         ('portfolio', 'Build Portfolio'),
+        ('short_term', 'Short-term Investment'),
+        ('fix&flip', 'Fix & Flip'),   
         ('other', 'Other')
     ], string="Capital Gain Type", help="Select the type of capital gain investment")
     capital_gain_type_other = fields.Char(string="Other Capital Gain Type", help="Please specify if 'Other' is selected")
 
+    buy_and_sell_period = fields.Selection([
+        ('less_1_year', 'Less than 1 Year'),
+        ('1_2_years', '1-2 Years'),
+        ('2_3_years', '2-3 Years'),
+        ('3_5_years', '3-5 Years'),
+        ('more_5_years', 'More than 5 Years'),
+        ('other', 'Other')
+    ], string="Buy & Sell Period", help="Select the period for buy and sell investment")
+    buy_and_sell_expected_profit=fields.Float(string="Expected Profit", help="Expected profit from buy and sell investment", digits=(16, 2))
+    buy_and_sell_expected_period_other = fields.Char(string="Other Expected Profit", help="Please specify if 'Other' is selected")
+
     passive_income_type = fields.Selection([
+
         ('long_term_rental', 'Long-term Rental'),
         ('short_term_rental', 'Short-term Rental'),
         ('hotel_concept', 'Hotel Concept'),
@@ -380,6 +395,10 @@ class CrmLead(models.Model):
         ('other', 'Other')
     ], string="Holiday Home Type", help="Select the type of holiday home usage")
     holiday_home_type_other = fields.Char(string="Other Holiday Home Type", help="Please specify if 'Other' is selected")
+    company_construct = fields.Text(string="Information about the company to be created")
+    company_construct_sector = fields.Char(string="Sector of the company to be created")
+    company_construct_number_of_employees = fields.Integer(string="Number of employees for the company to be created", help="Number of employees for the company to be created", default=0)
+    company_construct_services_loaction = fields.Text(string="Services and location of the company to be created")
 
     
 
@@ -770,6 +789,7 @@ class CrmLead(models.Model):
      domain="[('feature_type', '=', 'cooperation')]",
      help="Select the assets for sale you are looking for"
    )
+   
     #customer preferences
     
     # # Attached agents should be specific partners that are agents

@@ -1,11 +1,1 @@
-<odoo>
-    <record id="ir_cron_webmail_fetch_all_emails" model="ir.cron">
-        <field name="name">Webmail: Fetch All Emails</field>
-        <field name="model_id" ref="model_webmail_mailbox"/>
-        <field name="state">code</field>
-        <field name="code">model.cron_fetch_all_emails()</field>
-        <field name="interval_number">5</field>
-        <field name="interval_type">minutes</field>
-        <field name="active">True</field>
-    </record>
-</odoo>
+<odoo><data></data></odoo>

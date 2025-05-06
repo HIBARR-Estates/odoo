@@ -1,6 +1,6 @@
 <odoo>
-    <menuitem id="menu_webmail_root" name="Webmail" sequence="10"/>
-    <menuitem id="menu_webmail_accounts" name="Mail Accounts" parent="menu_webmail_root" action="action_mail_account"/>
-    <menuitem id="menu_webmail_compose" name="Compose Mail" parent="menu_webmail_root" action="action_compose_mail"/>
+    <menuitem id="menu_webmail_root" name="Webmail" sequence="10" action="action_mailbox_inbox"/>
     <menuitem id="menu_webmail_inbox" name="Inbox" parent="menu_webmail_root" action="action_mailbox_inbox"/>
+    <menuitem id="menu_webmail_compose" name="Compose Mail" parent="menu_webmail_root" action="action_compose_mail"/>
+    <!-- <menuitem id="menu_webmail_inbox" name="Inbox" parent="menu_webmail_root" action="action_mailbox_inbox"/> -->
 </odoo>

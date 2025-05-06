@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crm_lead_form_custom" model="ir.ui.view">
+    <field name="name">crm.lead.form.custom</field>
+    <field name="model">crm.lead</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="arch" type="xml">
+      <xpath expr="//notebook/page[2]" position="after">
+        <page string="Kickoff">
+            <group>
+                <field name="kick_off_meeting" string="Kick Off Date" placeholder="Enter Kick Off Date"/>
+                <field name="kick_off_meeting_time" string="Kick Off Time" placeholder="Enter Kick Off Time"/>
+                <field name="kick_off_meeting_follow_up"
+                    string="Kick Off Meeting Follow Up"
+                    placeholder="Enter Kick Off Meeting Follow Up"
+                    invisible="not kick_off_meeting"/>
+            </group>
+        </page>
+        </xpath>
+    </field>
+</record>
+</odoo>

@@ -47,4 +47,4 @@ class MailAccount(models.Model):
                     'type': 'danger',
                     'sticky': True,
                 },
-            }
+            }   

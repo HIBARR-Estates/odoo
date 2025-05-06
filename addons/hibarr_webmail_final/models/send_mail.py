@@ -10,7 +10,7 @@ class SendMail(models.Model):
     recipient_email = fields.Char(string='Recipient Email', required=True)
     subject = fields.Char(string='Subject', required=True)
     body = fields.Text(string='Body', required=True, default=lambda self: self._default_body())
-    mail_account_id = fields.Many2one('mail.account', string='Mail Account', required=True)
+    mail_account_id = fields.Many2one('webmail.mailbox', string='Mail Account', required=True)
     state = fields.Selection([
         ('draft', 'Draft'),
         ('sent', 'Sent'),
@@ -101,4 +101,3 @@ class SendMail(models.Model):
                     'sticky': True,
                 }
             }
-

@@ -1,22 +1,22 @@
-odoo.define('hibarr_webmail_final.webmail_notification', function (require) {
-    "use strict";
-    var bus = require('bus.bus_service');
-    var Notification = require('web.Notification');
-    var core = require('web.core');
-    var session = require('web.session');
-
-    bus.addChannel('webmail.new_email');
-    bus.on('notification', null, function (notifications) {
-        notifications.forEach(function (notification) {
-            if (notification[0][1] === 'webmail.new_email') {
-                var data = notification[1];
-                core.bus.trigger('do_notify', {
-                    title: 'New Email from ' + (data.sender || ''),
-                    message: (data.subject || '') + '<br>' + (data.body || ''),
-                    sticky: false,
-                    type: 'info',
-                });
-            }
-        });
+odoo.define('hibarr_webmail_final.notification', function (require) {
+    'use strict';
+    var WebClient = require('web.WebClient');
+    WebClient.include({
+        start: function () {
+            this._super.apply(this, arguments);
+            this.call('bus_service', 'onNotification', this, this._onNotification);
+        },
+        _onNotification: function (notifications) {
+            var self = this;
+            notifications.forEach(function (notification) {
+                if (notification[0] === 'webmail.new_email') {
+                    self.displayNotification({
+                        title: 'New Email',
+                        message: notification[1].subject,
+                        type: 'info',
+                    });
+                }
+            });
+        },
     });
 });

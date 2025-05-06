@@ -1,3 +1,0 @@
-name: hibarr_webmail_final
-version: 1.0
-description: Final version with working Mail Account and Composer
