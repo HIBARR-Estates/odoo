@@ -10,6 +10,7 @@
         "views/mail_account_views.xml",
         "views/send_mail_view.xml",
         "views/menu.xml",
+        "views/menu.xml",
         "wizards/mail_send_wizard_views.xml",
         "data/cron.xml"
     ],
