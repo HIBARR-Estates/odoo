@@ -9,11 +9,11 @@ class Mailbox(models.Model):
     _description = 'Mailbox'
 
     name = fields.Char(string='Mailbox Name', required=True)
-    smtp_server = fields.Char(string='SMTP Server', required=True)
+    smtp_server = fields.Char(string='SMTP Server', required=True, default='sslout.de')
     smtp_port = fields.Integer(string='SMTP Port', required=True, default=465)
     smtp_user = fields.Char(string='SMTP User', required=True)
     smtp_password = fields.Char(string='SMTP Password', required=True)
-    imap_server = fields.Char(string='IMAP Server', required=True)
+    imap_server = fields.Char(string='IMAP Server', required=True, default='sslin.de')
     imap_port = fields.Integer(string='IMAP Port', required=True, default=993)
     recipient_partner_ids = fields.Many2many('res.partner', string='Recipients')
     subject = fields.Char(string='Subject')

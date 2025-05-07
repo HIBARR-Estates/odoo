@@ -1,6 +1,10 @@
 from odoo import models, fields, api
 import re
 from datetime import datetime, timedelta
+from markupsafe import Markup, escape
+from bs4 import BeautifulSoup, Doctype
+from odoo.http import request
+from odoo.tools.safe_eval import safe_eval
 
 class Email(models.Model):
     _name = 'webmail.email'
@@ -22,7 +26,60 @@ class Email(models.Model):
     parent_id = fields.Many2one('webmail.email', string='Parent Email')
     sender_name = fields.Char(string='Sender Name', compute='_get_sender_name')
     formatted_date = fields.Char(string='Formatted Date', compute='_get_formatted_date')
+    rendered_body = fields.Html(string='Rendered Body', compute='_compute_rendered_body')
     reply_count = fields.Integer(string='Reply Count', compute='_compute_reply_count')
+
+    @api.depends('body', 'attachment_ids')
+    def _compute_rendered_body(self):
+        for record in self:
+            if record.body:
+                # Parse the email body with BeautifulSoup
+                soup = BeautifulSoup(record.body, 'lxml')
+
+                # Clean and fix HTML (remove invalid or redundant tags)
+                for tag in soup.find_all(True):
+                    if tag.name.lower() in ['style', 'script', 'meta', 'link']:
+                        tag.decompose()  # Remove these tags
+                    elif tag.name.lower() in ['html', 'head', 'body', 'footer']:
+                        tag.unwrap()  # Remove outermost tags
+
+                # Ensure a proper DOCTYPE (optional)
+                clean_html = BeautifulSoup("<!DOCTYPE html><html><head></head><body></body></html>", 'lxml')
+                clean_html.html.body.append(soup)
+
+                # Convert any text URLs to clickable links
+                for text in clean_html.find_all(text=True):
+                    if text.parent.name not in ['a', 'script', 'style']:
+                        new_text = re.sub(
+                            r'(https?://[^\s]+)',
+                            r'<a href="\1" target="_blank">\1</a>',
+                            text
+                        )
+                        text.replace_with(new_text)
+
+                # Add attachments if any
+                if record.attachment_ids:
+                    attachment_section = clean_html.new_tag("div")
+                    attachment_section.append(clean_html.new_tag("br"))
+                    attachment_section.append(clean_html.new_tag("strong", string="Attachments:"))
+                    attachment_section.append(clean_html.new_tag("br"))
+
+                    for attachment in record.attachment_ids:
+                        attachment_link = clean_html.new_tag(
+                            "a",
+                            href=f"/web/content/{attachment.id}",
+                            target="_blank"
+                        )
+                        attachment_link.string = attachment.name
+                        attachment_section.append(attachment_link)
+                        attachment_section.append(clean_html.new_tag("br"))
+
+                    clean_html.html.body.append(attachment_section)
+
+                # Final rendered body
+                record.rendered_body = Markup(str(clean_html))
+            else:
+                record.rendered_body = ""
 
     @api.depends('child_ids')
     def _compute_reply_count(self):
@@ -96,9 +153,7 @@ class Email(models.Model):
     def action_delete(self):
         self.ensure_one()
         self.unlink()
-        return {
-            'type': 'ir.actions.act_window_close'
-        }
+        return {'type': 'ir.actions.act_window_close'}
 
     def action_view_email(self):
         self.ensure_one()
