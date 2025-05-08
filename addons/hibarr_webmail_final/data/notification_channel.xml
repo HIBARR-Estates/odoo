@@ -1,0 +1,8 @@
+<odoo>
+    <record id="channel_webmail_notifications" model="mail.channel">
+        <field name="name">Webmail Notifications</field>
+        <field name="public">private</field>
+        <field name="channel_type">channel</field>
+        <field name="group_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+</odoo>

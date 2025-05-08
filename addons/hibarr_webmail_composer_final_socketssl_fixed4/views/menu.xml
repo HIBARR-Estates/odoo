@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <menuitem id="menu_webmail_root" name="E-Mail" sequence="1"/>
-    <menuitem id="menu_webmail_accounts" name="Mail Accounts" parent="menu_webmail_root" action="action_mail_account" sequence="2"/>
-</odoo>
