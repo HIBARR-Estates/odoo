@@ -418,8 +418,8 @@
                 </group>
             </page>
         </xpath>
-        <xpath expr="//group[.//field[@name='partner_name']]" position="replace">
-            <group class="mt48">
+        <xpath expr="//notebook/page[@name='lead']" position="inside">
+            <group class="mt48" invisible = "1">
                
                 <group string="Marketing">
                     <field name="campaign_id" options="{'create_name_field': 'title'}"/>
