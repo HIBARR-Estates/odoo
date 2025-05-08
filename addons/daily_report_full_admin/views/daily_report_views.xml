@@ -1,0 +1,53 @@
+<odoo>
+    <record id="view_form_daily_employee_report" model="ir.ui.view">
+        <field name="name">daily.employee.report.form</field>
+        <field name="model">daily.employee.report</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Daily Report">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="report_date"/>
+                        <field name="report_text"/>
+                        <field name="attachment_ids" widget="many2many_binary"/>
+                    </group>
+                    <group string="Manager Feedback">
+                        <field name="supervisor_rating" widget="priority"/>
+                        <field name="supervisor_comment"/>
+                    </group>
+                    <group string="HR Feedback">
+                        <field name="hr_rating" widget="priority"/>
+                        <field name="hr_comment"/>
+                    </group>
+                    <field name="submitted_at" readonly="1"/>
+                    <field name="is_late" readonly="1" />
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_tree_daily_employee_report" model="ir.ui.view">
+        <field name="name">daily.employee.report.tree</field>
+        <field name="model">daily.employee.report</field>
+        <field name="type">list</field>
+        <field name="arch" type="xml">
+            <list string="Daily Reports">
+                <field name="employee_id" width="30%" />
+                <field name="supervisor_rating" width="25%" widget="priority"/>
+                <field name="hr_rating" width="25%" widget="priority"/>
+                <field name="is_late" width="10%" widget="boolean"/>
+                <field name="report_date" width="10%" />
+            </list>
+        </field>
+    </record>
+
+    <record id="action_daily_employee_report" model="ir.actions.act_window">
+        <field name="name">Daily Reports</field>
+        <field name="res_model">daily.employee.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_daily_employee_report_root" name="Daily Reports"/>
+    <menuitem id="menu_daily_employee_report" name="Reports" parent="menu_daily_employee_report_root" action="action_daily_employee_report"/>
+</odoo>

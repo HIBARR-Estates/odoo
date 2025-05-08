@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_daily_report_admin_root" name="Daily Report Admin" sequence="10" groups="daily_report_full_admin.group_daily_report_admin"/>
+</odoo>

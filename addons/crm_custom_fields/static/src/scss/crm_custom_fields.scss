@@ -1,0 +1,55 @@
+.o_form_view {
+    .custom-commission-row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        width: 100%;
+
+        .commission-field {
+            flex: 0 0 25%;
+        }
+
+        .agent-field {
+            flex: 1;
+        }
+    }
+
+    .custom-address-group {
+        margin-bottom: 1rem;
+    }
+
+    .referral-row {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+
+        .referral-source {
+            flex: 1;
+        }
+
+        .referral-commission {
+            flex: 0 0 28%;
+        }
+    }
+} 
+.o_field_many2many_checkboxes .o-checkbox.form-check {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+.o_field_many2many_checkboxes > div > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.narrow_field {
+    width: 10px !important;
+}
+
+.o_form_sheet {
+    .o_form_sheet_width_100 {
+        width: 100% !important;
+    }
+}

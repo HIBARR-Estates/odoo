@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit_custom" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.custom</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//notebook/page[1]" position="before">
+                <page string="Additional Information" name="custom_info">
+                                <!-- Personal Information -->
+                        <div class="o_row">
+                        <label for="employment_status" string="Employment Status" class="oe_inline"/>
+                        <field name="employment_status" widget="radio" options="{'horizontal': true}"/>
+                        </div>
+                        <div class="o_row">
+                        <label for="employment_status_other" string="Other Employment Status" class="oe_inline" invisible="employment_status != 'other'"/>
+                        <field name="employment_status_other" placeholder="Other" invisible="employment_status != 'other'"/>
+                        </div>
+                        <div class="o_row">
+                        <label for="occupation" string="Occupation" class="oe_inline"/>
+                        <field name="occupation" placeholder="Occupation"/>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="income" placeholder="Income" widget = "monetary" options="{'currency_field': 'company_currency'}"/>
+                                <div class="o_row">
+                                
+                                    <label for="languages" string="Languages" class="oe_inline"/>
+                                    <field name="languages" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                              
+                                    <field name="other_languages" placeholder="Specify Other Language" invisible="not language_other_visible"/>
+                                
+                                <field name="children_group" widget="radio" options="{'horizontal': true}"/>
+                            </group>
+                            <group>
+                                <field name="additional_income" placeholder="Additional Income" widget="monetary" options="{'currency_field': 'company_currency'}" />
+                                <field name="marital_status" widget="radio" options="{'horizontal': true}"/>
+                            </group>
+                            
+                        </group>
+                          <group string = "Children Information" col="2" invisible="children_group != 'yes'">
+                              <group>
+                               <div class="o_row"> 
+                                <label for="age" string="Child 1 Age" class="oe_inline"/>
+                               <field name="age" placeholder="Child 1 Age" class = "narrow_field"/>
+                               <label for="gender" string="Gender" class="oe_inline"/>
+                               <field name="gender" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                               <group>
+                               <div class="o_row">
+                               <label for="age2" string="Child 2 Age" class="oe_inline"/>
+                               <field name="age2" placeholder="Child 2 Age" class = "narrow_field"/>
+                               <label for="gender2" string="Gender" class="oe_inline"/>
+                               <field name="gender2" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                               <group>
+                               <div class="o_row">
+                               <label for="age3" string="Child 3 Age" class="oe_inline"/>
+                               <field name="age3" placeholder="Child 3 Age" class = "narrow_field"/>
+                               <label for="gender3" string="Gender" class="oe_inline"/>
+                               <field name="gender3" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                               <group>
+                               <div class="o_row">
+                               <label for="age4" string="Child 4 Age" class="oe_inline"/>
+                               <field name="age4" placeholder="Child 4 Age" class = "narrow_field"/>
+                                <label for="gender4" string="Gender" class="oe_inline"/>
+                               <field name="gender4" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                               <group>
+                               <div class="o_row">  
+                               <label for="age5" string="Child 5 Age" class="oe_inline"/>
+                               <field name="age5" placeholder="Child 5 Age" class = "narrow_field" />
+                               <label for="gender5" string="Gender" class="oe_inline"/>
+                               <field name="gender5" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                               <group>
+                               <div class="o_row">
+                               <label for="personal_question1" string="Are you currently living with your children?" class="oe_inline"/>
+                               <field name="personal_question1" widget="radio" options="{'horizontal': true}"/>
+                               </div>
+                               </group>
+                            </group>
+                    
+                </page>
+            </xpath>
+            <!-- Partner Information -->
+            <xpath expr="//notebook/page[1]" position="after" >
+                <page string="Partner Information" >
+                    <group>
+                        <group>
+                            <field name="partner_first_name" placeholder="Partner's First Name"/>
+                            <field name="partner_city" placeholder="Partner's City"/>
+                            <field name="partner_country" widget="many2one" options="{'no_create': True}"/>
+                            <field name="partner_nationality" widget="many2one" options="{'no_create': True}"/>
+                             <div class="o_row">
+                                <label for="partner_languages" string="Languages" class="oe_inline"/>
+                                <field name="partner_languages" widget="many2many_tags" options="{'no_open': True, 'no_create': True}"/>
+                            </div>
+                            <field name="partner_other_languages" placeholder="Specify Other Language" invisible="not partner_language_other_visible"/>
+                        </group>
+                        <group>
+                            <field name="partner_last_name" placeholder="Partner's Last Name"/>
+                            <div class="o_row">
+                                <label for="partner_employment_status" string="Employment Status" class="oe_inline"/>
+                                <field name="partner_employment_status" widget="radio" options="{'horizontal': true}"/>
+                            </div>
+                            
+                            
+                            <field name="partner_occupation" placeholder="Partner's Occupation"/>
+                            <field name="partner_income" widget="monetary" placeholder="Partner's Income" options="{'currency_field': 'company_currency'}"/>
+                            <field name="partner_additional_income" widget="monetary" placeholder="Partner's Additional Income" options="{'currency_field': 'company_currency'}"/>
+                           
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

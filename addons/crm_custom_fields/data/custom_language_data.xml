@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="clang_de" model="custom.language">
+            <field name="name">German</field>
+            <field name="code">DE</field>
+        </record>
+        <record id="clang_en" model="custom.language">
+            <field name="name">English</field>
+            <field name="code">EN</field>
+        </record>
+        <record id="clang_ar" model="custom.language">
+            <field name="name">Arabic</field>
+            <field name="code">AR</field>
+        </record>
+        <record id="clang_tr" model="custom.language">
+            <field name="name">Turkish</field>
+            <field name="code">TR</field>
+        </record>
+        <record id="clang_ru" model="custom.language">
+            <field name="name">Russian</field>
+            <field name="code">RU</field>
+        </record>
+    </data>
+</odoo>

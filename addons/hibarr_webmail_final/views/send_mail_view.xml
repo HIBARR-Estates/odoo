@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_send_mail_form" model="ir.ui.view">
+        <field name="name">send.mail.form</field>
+        <field name="model">send.mail</field>
+        <field name="arch" type="xml">
+            <form string="Send Mail" create="false" edit="false">               
+                <sheet>
+                    <group>
+                        <field name="mail_account_id" domain="[('user_id', '=', uid)]"/>
+                        <field name="recipient_email"/>
+                        <field name="subject"/>
+                        <field name="body" widget="html" options="{'height': 400, 'styleWithSpan': true}" class="o_summernote_custom"/>
+                    </group>
+                </sheet>
+            <footer>
+                <button string="Cancel" special="cancel" class="btn-secondary" ignore_required="1"/>
+                <button name="action_save_draft" string="Save as Draft" type="object" class="btn-secondary"/>
+                <button name="action_send_mail" string="Send" type="object" class="oe_highlight"/>
+            </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_compose_mail" model="ir.actions.act_window">
+        <field name="name">Compose Mail</field>
+        <field name="res_model">send.mail</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

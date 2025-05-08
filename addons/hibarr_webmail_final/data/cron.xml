@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+        <record id="ir_cron_webmail_fetch" model="ir.cron">
+            <field name="name">Fetch New Webmail and Notify</field>
+            <field name="model_id" ref="mail.model_mail_mail"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_new_emails_and_notify()</field>
+            <field name="interval_number">5</field>
+            <field name="interval_type">minutes</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

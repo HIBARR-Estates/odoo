@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+    <record id="model_daily_report" model="ir.model">
+      <field name="name">daily.report</field>
+      <field name="model">daily.report</field>
+      <field name="state">base</field>
+    </record>
+  </data>
+</odoo>

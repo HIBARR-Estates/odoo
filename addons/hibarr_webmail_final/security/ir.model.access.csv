@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_send_mail_user,send.mail.user,model_send_mail,base.group_user,1,1,1,1
+access_webmail_mailbox_user,webmail.mailbox.user,model_webmail_mailbox,base.group_user,1,1,1,1
+access_webmail_email_user,webmail.email.user,model_webmail_email,base.group_user,1,1,1,1
+webmail_mailbox_user_rule,Mailbox: only see own mailboxes,model_webmail_mailbox,base.group_user,1,0,0,0
+webmail_email_user_rule,Email: only see emails in own mailboxes,model_webmail_email,base.group_user,1,0,0,0
