@@ -10,11 +10,11 @@
     'author': 'HIBARR Estates',
     'depends': ['base', 'contacts', 'custom_contact_info','crm'],
     'data': [
+        'security/lead_salesperson_rule.xml',
+        
         'views/analysis_view.xml',
         'views/lead_participant_views.xml',
         'data/property_feature_data.xml',
-        'security/lead_salesperson_rule.xml',
-        'security/ir.model.access.csv',
     ],
     'assets': {
         'web.assets_backend': [
